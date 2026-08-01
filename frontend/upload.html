@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RecruitFlow - Upload Resume</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body class="bg-light">
+
+    <!-- Navbar -->
+
+    <nav class="navbar navbar-dark bg-dark">
+
+        <div class="container">
+
+            <a class="navbar-brand" href="index.html">
+
+                <i class="fa-solid fa-user-tie"></i>
+
+                RecruitFlow
+
+            </a>
+
+        </div>
+
+    </nav>
+
+    <!-- Upload Card -->
+
+    <div class="container mt-5">
+
+        <div class="row justify-content-center">
+
+            <div class="col-md-8 col-lg-6">
+
+                <div class="card shadow-lg">
+
+                    <div class="card-header bg-primary text-white">
+
+                        <h3>
+
+                            <i class="fa-solid fa-upload"></i>
+
+                            Upload Resume
+
+                        </h3>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <form id="uploadForm">
+                            <button type="button" onclick="alert('Button Works')">
+    Test Button
+</button>
+
+                            <div class="mb-3">
+
+                                <label class="form-label">
+
+                                    Select Resume
+
+                                </label>
+
+                                <input
+                                    type="file"
+                                    class="form-control"
+                                    id="resume"
+                                    name="resume"
+                                    accept=".pdf,.doc,.docx"
+                                    required>
+
+                            </div>
+
+                            <button
+                                type="submit"
+                                class="btn btn-success w-100">
+
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                                Upload Resume
+
+                            </button>
+
+                        </form>
+
+                        <div id="message" class="mt-3"></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        const API_URL = "http://127.0.0.1:5000";
+
+alert("JavaScript is working!");
+
+        const form = document.getElementById("uploadForm");
+
+        form.addEventListener("submit", async function (e) {
+
+            e.preventDefault();
+
+            const fileInput = document.getElementById("resume");
+
+            if (fileInput.files.length === 0) {
+
+                document.getElementById("message").innerHTML =
+                    '<div class="alert alert-danger">Please select a resume.</div>';
+
+                return;
+            }
+
+            const formData = new FormData();
+
+            formData.append("resume", fileInput.files[0]);
+
+            try {
+
+               const response = await fetch(API_URL + "/upload", {
+
+    method: "POST",
+
+    body: formData
+
+});
+
+console.log("HTTP Status:", response.status);
+
+const result = await response.json();
+
+console.log("Backend Response:", result);
+                console.log(result);
+
+                if (result.success) {
+
+                    localStorage.setItem(
+                        "candidate",
+                        JSON.stringify(result.candidate)
+                    );
+
+                    localStorage.setItem(
+                        "ai",
+                        result.ai_analysis
+                    );
+
+                    document.getElementById("message").innerHTML =
+                        '<div class="alert alert-success">' +
+                        result.message +
+                        '</div>';
+
+                    setTimeout(function () {
+
+                        window.location.href = "candidate.html";
+
+                    }, 1000);
+
+                }
+
+                else {
+
+                    document.getElementById("message").innerHTML =
+                        '<div class="alert alert-danger">' +
+                        result.message +
+                        '</div>';
+
+                }
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+                document.getElementById("message").innerHTML =
+                    '<div class="alert alert-danger">Cannot connect to the backend server.</div>';
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
