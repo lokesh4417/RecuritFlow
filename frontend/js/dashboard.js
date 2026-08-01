@@ -16,7 +16,9 @@ async function loadDashboard() {
             throw new Error("Failed to fetch candidates");
         }
 
-        const candidates = await response.json();
+       const result = await response.json();
+
+const candidates = result.data;
 
         // Dashboard Cards
         document.getElementById("candidateCount").textContent = candidates.length;
@@ -143,19 +145,44 @@ function createCharts(candidates) {
 
     // Skills Pie Chart
     skillsChart = new Chart(
-        document.getElementById("skillsChart"),
-        {
-            type: "pie",
-            data: {
-                labels: Object.keys(skillCounts),
-                datasets: [{
-                    label: "Skills",
-                    data: Object.values(skillCounts)
-                }]
-            }
-        }
-    );
+    document.getElementById("skillsChart"),
+    {
+        type: "pie",
 
+        data: {
+            labels: Object.keys(skillCounts),
+
+            datasets: [{
+                label: "Skills",
+                data: Object.values(skillCounts)
+            }]
+        },
+
+
+        options: {
+
+            responsive:true,
+
+            maintainAspectRatio:false,
+
+
+            plugins:{
+
+                legend:{
+                    position:"bottom",
+
+                    labels:{
+                        boxWidth:20
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+);
     // Candidate Count Bar Chart
     candidateChart = new Chart(
         document.getElementById("candidateChart"),

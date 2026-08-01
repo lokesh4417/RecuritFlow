@@ -10,6 +10,7 @@ class ResumeParser:
         self.filepath = filepath
         self.text = ""
 
+
     # -------------------------
     # Read PDF
     # -------------------------
@@ -20,11 +21,12 @@ class ResumeParser:
         text = ""
 
         for page in document:
-            text += page.get_text()
+            text += page.get_text("text") + "\n"
 
         document.close()
 
         return text.strip()
+
 
     # -------------------------
     # Read DOCX
@@ -41,6 +43,7 @@ class ResumeParser:
 
         return text.strip()
 
+
     # -------------------------
     # Extract Text
     # -------------------------
@@ -55,9 +58,12 @@ class ResumeParser:
             self.text = self.read_docx()
 
         else:
-            raise Exception("Unsupported file format. Only PDF and DOCX are supported.")
+            raise Exception(
+                "Unsupported file format. Only PDF and DOCX are supported."
+            )
 
         return self.text
+
 
     # -------------------------
     # Extract Email
@@ -71,6 +77,7 @@ class ResumeParser:
 
         return emails[0] if emails else ""
 
+
     # -------------------------
     # Extract Phone Number
     # -------------------------
@@ -83,6 +90,7 @@ class ResumeParser:
 
         return phones[0] if phones else ""
 
+
     # -------------------------
     # Extract Name
     # -------------------------
@@ -90,19 +98,44 @@ class ResumeParser:
 
         lines = self.text.split("\n")
 
-        for line in lines:
+        ignore_words = [
+            "resume",
+            "curriculum vitae",
+            "email",
+            "phone",
+            "mobile",
+            "contact",
+            "linkedin",
+            "github",
+            "objective",
+            "skills",
+            "education",
+            "experience"
+        ]
+
+        for line in lines[:10]:
 
             line = line.strip()
 
-            if (
-                len(line.split()) >= 2
-                and len(line) < 40
-                and not any(char.isdigit() for char in line)
-                and "@" not in line
-            ):
+            if not line:
+                continue
+
+            lower = line.lower()
+
+            if any(word in lower for word in ignore_words):
+                continue
+
+            if "@" in line:
+                continue
+
+            if any(char.isdigit() for char in line):
+                continue
+
+            if 2 <= len(line.split()) <= 5 and len(line) < 50:
                 return line.title()
 
-        return ""
+        return "Unknown Candidate"
+
 
     # -------------------------
     # Extract Skills
@@ -149,6 +182,7 @@ class ResumeParser:
                 found.append(skill)
 
         return sorted(list(set(found)))
+
 
     # -------------------------
     # Final Parsed Data

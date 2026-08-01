@@ -5,14 +5,19 @@
 const candidate = JSON.parse(localStorage.getItem("candidate"));
 const aiAnalysis = localStorage.getItem("ai");
 
+
+console.log("Candidate Data:", candidate);
+console.log("AI Analysis:", aiAnalysis);
+
+
 if (!candidate) {
 
     document.body.innerHTML = `
         <div class="container mt-5">
             <div class="alert alert-danger">
                 <h3>No Candidate Selected</h3>
-                <a href="dashboard.html" class="btn btn-primary mt-3">
-                    Go to Dashboard
+                <a href="upload.html" class="btn btn-primary mt-3">
+                    Upload Resume
                 </a>
             </div>
         </div>
@@ -21,25 +26,37 @@ if (!candidate) {
 }
 else {
 
+
+    // =========================
     // Candidate Information
+    // =========================
+
     document.getElementById("name").textContent =
         candidate.name || "Not Available";
+
 
     document.getElementById("email").textContent =
         candidate.email || "Not Available";
 
+
     document.getElementById("phone").textContent =
         candidate.phone || "Not Available";
 
+
+    // =========================
     // Skills
-    const skills = document.getElementById("skills");
-    skills.innerHTML = "";
+    // =========================
+
+    const skillsList = document.getElementById("skills");
+
+    skillsList.innerHTML = "";
+
 
     if (candidate.skills) {
 
         candidate.skills.split(",").forEach(skill => {
 
-            skills.innerHTML += `
+            skillsList.innerHTML += `
                 <li class="list-group-item">
                     ${skill.trim()}
                 </li>
@@ -47,9 +64,10 @@ else {
 
         });
 
-    } else {
+    }
+    else {
 
-        skills.innerHTML = `
+        skillsList.innerHTML = `
             <li class="list-group-item">
                 No Skills Found
             </li>
@@ -57,35 +75,79 @@ else {
 
     }
 
-    // AI Analysis
-    document.getElementById("analysis").textContent =
-    aiAnalysis || "AI Analysis not available.";
 
-// Extract Resume Score
-const scoreMatch = aiAnalysis?.match(/Resume Score:\s*(.*)/i);
-if (scoreMatch) {
-    document.getElementById("score").textContent =
-        scoreMatch[1].trim();
-}
 
-// Extract Recommended Role
-const roleMatch = aiAnalysis?.match(/Recommended Job Role:\s*(.*)/i);
-if (roleMatch) {
-    document.getElementById("role").textContent =
-        roleMatch[1].trim();
-}
+    // =========================
+    // AI Analysis Display
+    // =========================
 
-// Extract Experience Level
-const expMatch = aiAnalysis?.match(/Experience Level:\s*(.*)/i);
-if (expMatch) {
-    document.getElementById("experience").textContent =
-        expMatch[1].trim();
-}
+    if(aiAnalysis){
 
-// Extract Hiring Recommendation
-const hireMatch = aiAnalysis?.match(/Hiring Recommendation:\s*(.*)/i);
-if (hireMatch) {
-    document.getElementById("hiring").textContent =
-        hireMatch[1].trim();
-}
+        document.getElementById("analysis").textContent =
+            aiAnalysis;
+
+
+        // Resume Score
+        const scoreMatch =
+        aiAnalysis.match(/Resume Score:\s*([^\n]+)/i);
+
+        if(scoreMatch){
+
+            document.getElementById("score").textContent =
+            scoreMatch[1].trim();
+
+        }
+
+
+
+        // Recommended Role
+
+        const roleMatch =
+        aiAnalysis.match(/Recommended Job Role:\s*([^\n]+)/i);
+
+        if(roleMatch){
+
+            document.getElementById("role").textContent =
+            roleMatch[1].trim();
+
+        }
+
+
+
+        // Experience Level
+
+        const experienceMatch =
+        aiAnalysis.match(/Experience Level:\s*([^\n]+)/i);
+
+        if(experienceMatch){
+
+            document.getElementById("experience").textContent =
+            experienceMatch[1].trim();
+
+        }
+
+
+
+        // Hiring Recommendation
+
+        const hiringMatch =
+        aiAnalysis.match(/Hiring Recommendation:\s*([^\n]+)/i);
+
+        if(hiringMatch){
+
+            document.getElementById("hiring").textContent =
+            hiringMatch[1].trim();
+
+        }
+
+
+    }
+
+    else{
+
+        document.getElementById("analysis").textContent =
+        "AI Analysis not available.";
+
+    }
+
 }

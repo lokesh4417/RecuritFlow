@@ -142,7 +142,7 @@ def upload_resume():
                 "phone": new_candidate.phone,
                 "skills": new_candidate.skills
             },
-            "ai_analysis": ai_result
+            "ai_analysis": ai_result["analysis"]
         })
 
     except Exception as e:
