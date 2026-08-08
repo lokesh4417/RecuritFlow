@@ -2,21 +2,21 @@
 
 ## Overview
 
-RecruitFlow Intelligence Engine is an AI-powered Resume Intelligence System that automates the recruitment process by parsing resumes, extracting candidate information, analyzing profiles using Google Gemini AI, and recommending suitable job roles.
+RecruitFlow Intelligence Engine is an AI-powered Resume Intelligence System that automates the recruitment process by parsing resumes, extracting candidate information, analyzing resumes using Google Gemini AI, and recommending suitable job roles for candidates.
 
 ---
 
 ## Features
 
 - Upload PDF and DOCX resumes
-- Resume parsing
-- Candidate information extraction
-- AI-powered resume analysis
+- Resume parsing and information extraction
+- AI-powered resume analysis using Google Gemini
+- Candidate profile generation
 - Job role recommendation
-- Suitability scoring
-- MySQL database integration
-- Dashboard for recruiters
+- Resume suitability scoring
+- Recruiter dashboard
 - Candidate analytics with graph visualization
+- SQLite/MySQL database support
 
 ---
 
@@ -47,7 +47,7 @@ RecruitFlow Intelligence Engine is an AI-powered Resume Intelligence System that
 
 ## Project Structure
 
-```
+```text
 RecruitFlow/
 │
 ├── backend/
@@ -58,18 +58,22 @@ RecruitFlow/
 │   ├── database.py
 │   ├── models.py
 │   ├── requirements.txt
-│   └── uploads/
+│   ├── uploads/
+│   └── recruitflow.db
 │
 ├── frontend/
 │   ├── index.html
 │   ├── upload.html
-│   ├── dashboard.html
 │   ├── candidate.html
+│   ├── dashboard.html
 │   ├── css/
-│   │      style.css
-│   ├── js/
-│   │      script.js
-│   └── images/
+│   └── js/
+│
+├── screenshots/
+│   ├── home.jpeg
+│   ├── upload.jpeg
+│   ├── candidate.jpeg
+│   └── dashboard.jpeg
 │
 └── README.md
 ```
@@ -78,75 +82,93 @@ RecruitFlow/
 
 ## Installation
 
-### Clone the Project
+### Clone the Repository
 
-```
-git clone <repository-url>
+```bash
+git clone https://github.com/lokesh4417/RecuritFlow.git
+cd RecuritFlow
 ```
 
 ### Create Virtual Environment
 
-```
+```bash
 python -m venv venv
 ```
 
 ### Activate Virtual Environment
 
-Windows
+**Windows**
 
-```
+```bash
 venv\Scripts\activate
 ```
 
-Linux / macOS
+**Linux / macOS**
 
-```
+```bash
 source venv/bin/activate
 ```
 
 ### Install Dependencies
 
-```
+```bash
 pip install -r backend/requirements.txt
 ```
 
 ### Run the Backend
 
-```
+```bash
 cd backend
 python app.py
 ```
+
+### Open the Frontend
+
+Open `frontend/index.html` using **Live Server** in VS Code.
+
 ---
 
 ## Screenshots
 
+### Home Page
+
+![Home Page](screenshots/home.jpeg)
+
 ### Resume Upload Page
 
-(Add upload page screenshot here)
+![Upload Page](screenshots/upload.jpeg)
 
 ### Candidate Analysis Page
 
-(Add candidate page screenshot here)
+![Candidate Page](screenshots/candidate.jpeg)
 
 ### Recruiter Dashboard
 
-(Add dashboard screenshot here)
+![Dashboard](screenshots/dashboard.jpeg)
 
 ---
 
 ## Future Improvements
 
 - Resume ranking
-- Candidate search
-- HR dashboard
+- Candidate search and filtering
 - Interview scheduling
 - ATS integration
-- Skill gap analysis
 - Email notifications
+- Skill gap analysis
+- Multi-user authentication
+- Cloud deployment
 
 ---
 
 ## Developed By
 
-Lokesh Galiveti
-B.Tech CSE (AIML)
+**Lokesh Galiveti**
+
+B.Tech – Computer Science and Engineering (Artificial Intelligence & Machine Learning)
+
+---
+
+## License
+
+This project is developed for educational and learning purposes.
