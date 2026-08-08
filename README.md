@@ -2,52 +2,100 @@
 
 ## Overview
 
-RecruitFlow Intelligence Engine is an AI-powered Resume Intelligence System that automates the recruitment process by parsing resumes, extracting candidate information, analyzing resumes using Google Gemini AI, and recommending suitable job roles for candidates.
+**RecruitFlow Intelligence Engine** is an AI-powered Resume Intelligence System designed to automate and improve the recruitment process.
+
+The system allows recruiters to upload resumes, automatically extract candidate information, analyze candidate profiles using **Google Gemini AI**, generate suitability scores, and recommend suitable job roles.
+
+RecruitFlow reduces manual resume screening effort and helps recruiters make faster and better hiring decisions.
 
 ---
 
-## Features
+# Features
 
+## Resume Processing
 - Upload PDF and DOCX resumes
-- Resume parsing and information extraction
-- AI-powered resume analysis using Google Gemini
+- Automatic resume parsing
+- Candidate information extraction
+- Skill identification
+
+## AI-Powered Analysis
+- Resume analysis using Google Gemini AI
 - Candidate profile generation
 - Job role recommendation
 - Resume suitability scoring
-- Recruiter dashboard
-- Candidate analytics with graph visualization
-- SQLite/MySQL database support
+
+## Recruiter Dashboard
+- Candidate management
+- Candidate analytics
+- Graph-based visualization
+- Resume insights
+
+## Database Support
+- SQLite database integration
+- MySQL support
 
 ---
 
-## Technology Stack
+# Technology Stack
 
-### Frontend
+## Frontend
 - HTML5
 - CSS3
 - JavaScript
 - Bootstrap 5
 
-### Backend
+## Backend
 - Python
 - Flask
 - SQLAlchemy
 
-### Database
+## Database
 - SQLite / MySQL
 
-### AI
+## Artificial Intelligence
 - Google Gemini API
 
-### Resume Parsing
+## Resume Processing
 - PyMuPDF
 - python-docx
 
 ---
 
-## Project Structure
+# Project Architecture
 
-```text
+```
+                 User / Recruiter
+                        |
+                        |
+                 Upload Resume
+                        |
+                        |
+              Frontend (HTML/CSS/JS)
+                        |
+                        |
+              Flask Backend API
+                        |
+        --------------------------------
+        |                              |
+ Resume Parser                  Gemini AI Engine
+        |                              |
+        --------------------------------
+                        |
+                        |
+              Candidate Analysis
+                        |
+                        |
+              Database Storage
+                        |
+                        |
+              Recruiter Dashboard
+```
+
+---
+
+# Project Structure
+
+```
 RecruitFlow/
 │
 ├── backend/
@@ -58,8 +106,7 @@ RecruitFlow/
 │   ├── database.py
 │   ├── models.py
 │   ├── requirements.txt
-│   ├── uploads/
-│   └── recruitflow.db
+│   └── uploads/
 │
 ├── frontend/
 │   ├── index.html
@@ -80,95 +127,139 @@ RecruitFlow/
 
 ---
 
-## Installation
+# Installation & Setup
 
-### Clone the Repository
+## Clone Repository
 
 ```bash
 git clone https://github.com/lokesh4417/RecuritFlow.git
+
 cd RecuritFlow
 ```
 
-### Create Virtual Environment
+---
+
+## Create Virtual Environment
 
 ```bash
 python -m venv venv
 ```
 
-### Activate Virtual Environment
+---
 
-**Windows**
+## Activate Virtual Environment
+
+### Windows
 
 ```bash
 venv\Scripts\activate
 ```
 
-**Linux / macOS**
+### Linux / macOS
 
 ```bash
 source venv/bin/activate
 ```
 
-### Install Dependencies
+---
+
+## Install Dependencies
 
 ```bash
 pip install -r backend/requirements.txt
 ```
 
-### Run the Backend
+---
 
-```bash
-cd backend
-python app.py
+## Configure Gemini API
+
+Add your Google Gemini API key in the backend configuration.
+
+Example:
+
 ```
-
-### Open the Frontend
-
-Open `frontend/index.html` using **Live Server** in VS Code.
+GEMINI_API_KEY = "your_api_key"
+```
 
 ---
 
-## Screenshots
+## Run Backend
 
-### Home Page
+```bash
+cd backend
+
+python app.py
+```
+
+Backend will start at:
+
+```
+http://127.0.0.1:5000
+```
+
+---
+
+## Run Frontend
+
+Open:
+
+```
+frontend/index.html
+```
+
+using **Live Server** in VS Code.
+
+---
+
+# Screenshots
+
+## Home Page
 
 ![Home Page](screenshots/home.jpeg)
 
-### Resume Upload Page
+---
+
+## Resume Upload Page
 
 ![Upload Page](screenshots/upload.jpeg)
 
-### Candidate Analysis Page
+---
+
+## Candidate Analysis Page
 
 ![Candidate Page](screenshots/candidate.jpeg)
 
-### Recruiter Dashboard
+---
+
+## Recruiter Dashboard
 
 ![Dashboard](screenshots/dashboard.jpeg)
 
 ---
 
-## Future Improvements
+# Future Improvements
 
-- Resume ranking
-- Candidate search and filtering
-- Interview scheduling
+- Resume ranking system
+- Advanced candidate filtering
+- User authentication
+- Interview scheduling module
 - ATS integration
 - Email notifications
 - Skill gap analysis
-- Multi-user authentication
 - Cloud deployment
+- Multiple recruiter accounts
 
 ---
 
-## Developed By
+#  Developed By
 
-**Lokesh Galiveti**
+## Lokesh Galiveti
 
-B.Tech – Computer Science and Engineering (Artificial Intelligence & Machine Learning)
+**B.Tech Computer Science and Engineering**  
+**Artificial Intelligence & Machine Learning**
 
 ---
 
-## License
+# License
 
 This project is developed for educational and learning purposes.
